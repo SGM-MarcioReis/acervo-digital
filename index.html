@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Acervo Digital | Prestação de Contas</title>
+    <meta
+      name="description"
+      content="Acervo digital com fotos e textos para prestação de contas institucional."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <div class="container navbar">
+        <div class="brand">
+          <span class="brand-mark">A</span>
+          <div>
+            <strong>Acervo Digital</strong>
+            <small>Prestação de Contas</small>
+          </div>
+        </div>
+
+        <nav class="nav" aria-label="Navegação do site">
+          <a href="#inicio">Início</a>
+          <a href="#acervo">Acervo</a>
+          <a href="#relatorio">Relatório</a>
+          <a href="#contato">Contato</a>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <section id="inicio" class="hero">
+        <div class="container hero-grid">
+          <div class="hero-copy">
+            <span class="eyebrow">Registro visual e documental</span>
+            <h1>Acervo digital para apresentação de resultados e compromissos.</h1>
+            <p>
+              Este espaço reúne fotografias, registros e descrições que documentam ações,
+              impactos e realizações em um formato organizado, acessível e profissional para
+              prestação de contas.
+            </p>
+
+            <div class="hero-actions">
+              <a href="#acervo" class="button primary">Ver acervo</a>
+              <a href="#relatorio" class="button secondary">Ver relatório</a>
+            </div>
+
+            <ul class="stats" aria-label="Estatísticas do projeto">
+              <li>
+                <strong>24</strong>
+                <span>Registros</span>
+              </li>
+              <li>
+                <strong>06</strong>
+                <span>Programas</span>
+              </li>
+              <li>
+                <strong>100%</strong>
+                <span>Documentado</span>
+              </li>
+            </ul>
+          </div>
+
+          <div class="hero-visual" aria-label="Imagem ilustrativa da prestação de contas">
+            <div class="visual-card main">
+              <img
+                src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=900&q=80"
+                alt="Pessoas trabalhando em equipe"
+              />
+            </div>
+            <div class="visual-card floating">
+              <img
+                src="https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=700&q=80"
+                alt="Equipe reunida em reunião"
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="acervo" class="gallery-section">
+        <div class="container">
+          <div class="section-head">
+            <div>
+              <span class="eyebrow">Acervo</span>
+              <h2>Registro fotográfico com narrativa e contexto</h2>
+            </div>
+            <p>
+              Cada imagem acompanha uma descrição que contextualiza a ação, os resultados e o
+              impacto alcançado.
+            </p>
+          </div>
+
+          <div class="filters" aria-label="Filtros de categoria">
+            <button class="filter active" data-filter="all">Todos</button>
+            <button class="filter" data-filter="programa">Programa</button>
+            <button class="filter" data-filter="acao">Ação</button>
+            <button class="filter" data-filter="impacto">Impacto</button>
+          </div>
+
+          <div class="gallery-grid">
+            <article class="card" data-category="programa">
+              <img
+                src="https://images.unsplash.com/photo-1517048676732-d65bc937f952?auto=format&fit=crop&w=900&q=80"
+                alt="Equipe em reunião de planejamento"
+              />
+              <div class="card-body">
+                <span class="tag">Programa</span>
+                <h3>Planejamento e organização</h3>
+                <p>
+                  A equipe reuniu-se para alinhar metas, cronogramas e indicadores de execução,
+                  assegurando a boa condução das ações previstas e a clareza de responsabilidades.
+                </p>
+              </div>
+            </article>
+
+            <article class="card" data-category="acao">
+              <img
+                src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=900&q=80"
+                alt="Pessoas em atividade comunitária"
+              />
+              <div class="card-body">
+                <span class="tag">Ação</span>
+                <h3>Atividades comunitárias</h3>
+                <p>
+                  Durante a execução do projeto, foram realizadas ações voltadas à aproximação com a
+                  comunidade, fortalecendo o diálogo, a participação e a troca de experiências.
+                </p>
+              </div>
+            </article>
+
+            <article class="card" data-category="impacto">
+              <img
+                src="https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?auto=format&fit=crop&w=900&q=80"
+                alt="Crianças e voluntários em ação educativa"
+              />
+              <div class="card-body">
+                <span class="tag">Impacto</span>
+                <h3>Educação e inclusão</h3>
+                <p>
+                  Ações voltadas à educação e ao acolhimento deram visibilidade a projetos de extensão
+                  e de apoio social, ampliando oportunidades e promovendo bem-estar coletivo.
+                </p>
+              </div>
+            </article>
+
+            <article class="card" data-category="programa">
+              <img
+                src="https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=900&q=80"
+                alt="Reunião com apresentação de resultados"
+              />
+              <div class="card-body">
+                <span class="tag">Programa</span>
+                <h3>Acompanhamento dos resultados</h3>
+                <p>
+                  Em momento de avaliação, os indicadores foram apresentados e discutidos para orientar
+                  ajustes, ampliar bons resultados e reforçar a transparência da gestão.
+                </p>
+              </div>
+            </article>
+
+            <article class="card" data-category="acao">
+              <img
+                src="https://images.unsplash.com/photo-1541873676-a18131494184?auto=format&fit=crop&w=900&q=80"
+                alt="Pessoas prestando apoio em atividade social"
+              />
+              <div class="card-body">
+                <span class="tag">Ação</span>
+                <h3>Assistência e acolhimento</h3>
+                <p>
+                  A iniciativa contemplou ações de sensibilização, oferece suporte e mobilização da rede
+                  local, contribuindo para um atendimento mais humano e integrado.
+                </p>
+              </div>
+            </article>
+
+            <article class="card" data-category="impacto">
+              <img
+                src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=900&q=80"
+                alt="Grupo de pessoas em encontro de celebração"
+              />
+              <div class="card-body">
+                <span class="tag">Impacto</span>
+                <h3>Resultados e reconhecimento</h3>
+                <p>
+                  A entrega dos resultados demonstrou a relevância das ações e o compromisso com a
+                  melhoria contínua, fortalecendo a confiança da comunidade e das parcerias envolvidas.
+                </p>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section id="relatorio" class="report-section">
+        <div class="container report-grid">
+          <div class="report-copy">
+            <span class="eyebrow">Prestação de contas</span>
+            <h2>Desempenho, transparência e compromisso com a comunidade.</h2>
+            <p>
+              O conjunto de registros visuais e textuais demonstra o alcance das atividades realizadas,
+              destacando os avanços, os desafios enfrentados e as ações que seguiram em direção ao
+              fortalecimento institucional e social.
+            </p>
+
+            <div class="checklist">
+              <div>
+                <strong>01</strong>
+                <span>Execução planejada e acompanhada</span>
+              </div>
+              <div>
+                <strong>02</strong>
+                <span>Registro documental sistematizado</span>
+              </div>
+              <div>
+                <strong>03</strong>
+                <span>Resultado com impacto relevante</span>
+              </div>
+            </div>
+          </div>
+
+          <aside class="report-panel">
+            <h3>Resumo executivo</h3>
+            <ul>
+              <li><span>Objetivo</span><strong>Fortalecer ações sociais e institucionais</strong></li>
+              <li><span>Período</span><strong>2025 / 2026</strong></li>
+              <li><span>Parcerias</span><strong>Comunidade, organizações e equipe</strong></li>
+              <li><span>Resultado</span><strong>Avanço nas ações e visibilidade dos impactos</strong></li>
+            </ul>
+          </aside>
+        </div>
+      </section>
+    </main>
+
+    <footer id="contato" class="footer">
+      <div class="container footer-inner">
+        <div>
+          <strong>Acervo Digital</strong>
+          <p>Registro visual e textual para prestação de contas.</p>
+        </div>
+        <a href="mailto:contato@acervodigital.com.br" class="button secondary">Entre em contato</a>
+      </div>
+      <div class="footer-bottom">
+        <span>© <span id="year"></span> Acervo Digital</span>
+      </div>
+    </footer>
+
+    <script src="script.js"></script>
+  </body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
