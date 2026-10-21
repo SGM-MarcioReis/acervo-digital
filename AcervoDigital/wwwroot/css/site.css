@@ -202,6 +202,17 @@ nav a {
     box-shadow: var(--shadow);
 }
 
+.image-open {
+    display: block;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.image-open:hover {
+    transform: translateY(-2px);
+}
+
+.image-open img,
 .photo-card img,
 .admin-card img {
     width: 100%;
@@ -416,6 +427,76 @@ textarea.form-control {
     border-radius: 12px;
     border: 1px solid var(--border);
     margin-top: 8px;
+}
+
+.image-modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(12, 17, 25, 0.7);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 50;
+    padding: 24px;
+}
+
+.image-modal.is-open {
+    display: flex;
+}
+
+.image-modal-content {
+    position: relative;
+    width: min(980px, 92vw);
+    background: white;
+    border-radius: 22px;
+    box-shadow: 0 30px 80px rgba(0,0,0,0.28);
+    overflow: hidden;
+}
+
+.image-modal-close {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    width: 38px;
+    height: 38px;
+    border: none;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.9);
+    font-size: 1.5rem;
+    cursor: pointer;
+    z-index: 2;
+}
+
+.image-modal-image {
+    width: 100%;
+    max-height: 72vh;
+    object-fit: contain;
+    background: #f4f7fb;
+}
+
+.image-modal-body {
+    padding: 18px 22px 20px;
+}
+
+.image-modal-title {
+    margin: 0 0 8px;
+    font-size: 1.7rem;
+}
+
+.image-modal-description {
+    margin: 0;
+    color: var(--muted);
+    line-height: 1.7;
+}
+
+.alert-success {
+    background: rgba(34, 197, 94, 0.12);
+    color: #166534;
+    border: 1px solid rgba(34, 197, 94, 0.28);
+    border-radius: 12px;
+    padding: 12px 14px;
+    margin-bottom: 18px;
+    font-weight: 600;
 }
 
 @media (max-width: 640px) {

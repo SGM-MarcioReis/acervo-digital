@@ -1,35 +1,39 @@
 @model IEnumerable<AcervoDigital.Models.Imagem>
 
 @{
-    ViewData["Title"] = "Acervo Digital";
+    ViewData["Title"] = "Painel administrativo";
 }
 
-<section class="hero-section">
-    <div class="hero-copy">
-        <span class="eyebrow">Acervo digital</span>
-        <h1>Registre fotos e textos para prestação de contas</h1>
-        <p>
-            Adicione imagens com descrição, categoria e mantenha tudo organizado em um banco de dados local.
-        </p>
-        <div class="hero-actions">
-            <a asp-controller="Admin" asp-action="Login" class="btn btn-primary">Adicionar imagem</a>
-        </div>
+<div class="dashboard-header">
+    <div>
+        <span class="eyebrow">Painel administrativo</span>
+        <h1>Gerenciamento do acervo</h1>
     </div>
-</section>
+    <div class="header-actions">
+        <a asp-action="Create" class="btn btn-primary">Nova imagem</a>
+        <a asp-action="ChangePassword" class="btn btn-secondary">Alterar senha</a>
+        <a asp-action="Logout" class="btn btn-secondary">Sair</a>
+    </div>
+</div>
+
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="alert-success">@TempData["SuccessMessage"]</div>
+}
 
 @if (!Model.Any())
 {
-    <div class="empty-state">
-        <h2>Nenhuma imagem cadastrada ainda</h2>
-        <p>Comece adicionando a primeira foto do projeto, ação ou evento.</p>
+    <div class="empty-state admin-empty">
+        <h2>Nenhuma imagem cadastrada</h2>
+        <p>Cadastre sua primeira imagem para começar a organização do acervo.</p>
     </div>
 }
 else
 {
-    <div class="gallery-grid">
+    <div class="admin-grid">
         @foreach (var imagem in Model)
         {
-            <article class="photo-card">
+            <article class="admin-card">
                 <a href="@imagem.CaminhoArquivo"
                    class="image-open"
                    data-image="@imagem.CaminhoArquivo"
@@ -37,7 +41,7 @@ else
                    data-description="@(!string.IsNullOrWhiteSpace(imagem.Descricao) ? imagem.Descricao : "Sem descrição disponível.")">
                     <img src="@imagem.CaminhoArquivo" alt="@imagem.Titulo" />
                 </a>
-                <div class="photo-body">
+                <div class="admin-body">
                     <span class="tag">@imagem.Categoria</span>
                     <h3>@imagem.Titulo</h3>
                     @if (!string.IsNullOrWhiteSpace(imagem.Descricao))
@@ -45,6 +49,14 @@ else
                         <p>@imagem.Descricao</p>
                     }
                     <small>@imagem.DataCadastro.ToString("dd/MM/yyyy")</small>
+                    <div class="admin-actions">
+                        <a asp-action="Edit" asp-route-id="@imagem.Id" class="btn btn-secondary">Editar</a>
+                        <form asp-action="Delete" method="post">
+                            @Html.AntiForgeryToken()
+                            <input type="hidden" name="id" value="@imagem.Id" />
+                            <button type="submit" class="btn btn-danger">Excluir</button>
+                        </form>
+                    </div>
                 </div>
             </article>
         }

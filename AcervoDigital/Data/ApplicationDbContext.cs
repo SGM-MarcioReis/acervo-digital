@@ -10,4 +10,5 @@ public class ApplicationDbContext : DbContext
     }
 
     public DbSet<Imagem> Imagens => Set<Imagem>();
+    public DbSet<AdminAccount> AdminAccounts => Set<AdminAccount>();
 }

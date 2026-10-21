@@ -40,15 +40,15 @@ public class AdminController : Controller
             return View(model);
         }
 
-        var username = _configuration["Admin:Username"] ?? "admin";
-        var password = _configuration["Admin:Password"] ?? "admin123";
+        var admin = await _context.AdminAccounts
+            .FirstOrDefaultAsync(x => x.Username == model.Username);
 
-        if (model.Username == username && model.Password == password)
+        if (admin != null && admin.Password == model.Password)
         {
             var claims = new List<Claim>
             {
-                new(ClaimTypes.Name, model.Username),
-                new(ClaimTypes.NameIdentifier, model.Username)
+                new(ClaimTypes.Name, admin.Username),
+                new(ClaimTypes.NameIdentifier, admin.Username)
             };
 
             var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
@@ -82,6 +82,54 @@ public class AdminController : Controller
             .ToListAsync();
 
         return View(imagens);
+    }
+
+    public IActionResult ChangePassword()
+    {
+        return View(new AdminChangePasswordViewModel());
+    }
+
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> ChangePassword(AdminChangePasswordViewModel model)
+    {
+        if (!ModelState.IsValid)
+        {
+            return View(model);
+        }
+
+        var username = User.Identity?.Name;
+        var admin = await _context.AdminAccounts
+            .FirstOrDefaultAsync(x => x.Username == username);
+
+        if (admin == null)
+        {
+            return Challenge();
+        }
+
+        if (admin.Password != model.CurrentPassword)
+        {
+            ModelState.AddModelError(nameof(model.CurrentPassword), "Senha atual incorreta.");
+            return View(model);
+        }
+
+        if (string.IsNullOrWhiteSpace(model.NewPassword) || model.NewPassword.Length < 4)
+        {
+            ModelState.AddModelError(nameof(model.NewPassword), "A nova senha deve ter pelo menos 4 caracteres.");
+            return View(model);
+        }
+
+        if (model.NewPassword != model.ConfirmPassword)
+        {
+            ModelState.AddModelError(nameof(model.ConfirmPassword), "A confirmação da nova senha não confere.");
+            return View(model);
+        }
+
+        admin.Password = model.NewPassword;
+        await _context.SaveChangesAsync();
+
+        TempData["SuccessMessage"] = "Senha alterada com sucesso.";
+        return RedirectToAction(nameof(Dashboard));
     }
 
     public IActionResult Create()

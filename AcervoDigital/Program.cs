@@ -1,4 +1,5 @@
 using AcervoDigital.Data;
+using AcervoDigital.Models;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.EntityFrameworkCore;
@@ -46,6 +47,17 @@ using (var scope = app.Services.CreateScope())
 {
     var db = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
     db.Database.EnsureCreated();
+
+    if (!db.AdminAccounts.Any())
+    {
+        db.AdminAccounts.Add(new AdminAccount
+        {
+            Username = "admin",
+            Password = "admin123"
+        });
+
+        db.SaveChanges();
+    }
 }
 
 app.Run();
