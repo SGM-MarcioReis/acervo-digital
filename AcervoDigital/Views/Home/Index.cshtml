@@ -1,0 +1,49 @@
+@model IEnumerable<AcervoDigital.Models.Imagem>
+
+@{
+    ViewData["Title"] = "Acervo Digital";
+}
+
+<section class="hero-section">
+    <div class="hero-card">
+        <span class="eyebrow">Acervo digital</span>
+        <h1>Registre fotos e textos para prestação de contas</h1>
+        <p>
+            Adicione imagens com descrição, categoria e mantenha tudo organizado em um banco de dados local.
+        </p>
+        <div class="hero-actions">
+            <a asp-action="Create" class="btn btn-primary">Adicionar imagem</a>
+        </div>
+    </div>
+</section>
+
+@if (!Model.Any())
+{
+    <div class="empty-state">
+        <h2>Nenhuma imagem cadastrada ainda</h2>
+        <p>Comece adicionando a primeira foto do projeto, ação ou evento.</p>
+    </div>
+}
+else
+{
+    <div class="gallery-grid">
+        @foreach (var imagem in Model)
+        {
+            <article class="photo-card">
+                <img src="@imagem.CaminhoArquivo" alt="@imagem.Titulo" />
+                <div class="photo-body">
+                    <span class="tag">@imagem.Categoria</span>
+                    <h3>@imagem.Titulo</h3>
+                    @if (!string.IsNullOrWhiteSpace(imagem.Descricao))
+                    {
+                        <p>@imagem.Descricao</p>
+                    }
+                    <small>@imagem.DataCadastro.ToString("dd/MM/yyyy")</small>
+                    <div class="card-actions">
+                        <a asp-action="Delete" asp-route-id="@imagem.Id" class="btn btn-danger">Excluir</a>
+                    </div>
+                </div>
+            </article>
+        }
+    </div>
+}

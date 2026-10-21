@@ -1,32 +1,40 @@
 # Acervo Digital
 
-Projeto estático de acervo digital para prestação de contas, com:
-- página inicial institucional
-- galeria de fotos com textos descritivos
-- seção de relatório e resumo executivo
-- filtro por categoria de conteúdo
-- layout responsivo e moderno
-
-## Como abrir
-
-1. Baixe ou clone este repositório.
-2. Acesse a pasta do projeto.
-3. Abra o arquivo `index.html` em um navegador.
+Este repositório agora inclui um projeto ASP.NET Core para gerenciamento de imagens com banco de dados SQLite.
 
 ## Estrutura
 
-- `index.html` - página principal
-- `styles.css` - estilos e responsividade
-- `script.js` - filtro de categorias e rodapé com ano atual
+- `AcervoDigital/` — projeto em ASP.NET Core MVC
+- `AcervoDigital/wwwroot/uploads/` — pasta para armazenar as imagens enviadas
 
-## Personalização
+## Requisitos
 
-Você pode alterar:
-- textos de cada imagem
-- imagens de capa e galerias
-- nome da instituição
-- dados da prestação de contas
+- Visual Studio 2022
+- .NET 8 SDK
 
-## Observação
+## Como abrir no Visual Studio
 
-As imagens usadas neste modelo são carregadas via URLs externas do Unsplash para demonstrar o visual final. Quando for integrar com imagens reais, basta substituir os links por fotos do projeto.
+1. Abra o projeto `AcervoDigital/AcervoDigital.csproj` no Visual Studio.
+2. Restaure os pacotes NuGet.
+3. Pressione F5 para rodar a aplicação.
+4. Acesse a URL mostrada no navegador, normalmente `https://localhost:xxxx`.
+
+## Funcionalidades
+
+- Cadastro de imagens com título, categoria e descrição
+- Upload de imagem para a pasta `wwwroot/uploads`
+- Armazenamento dos dados no banco SQLite
+- Exibição da galeria em página inicial
+- Exclusão de registros e arquivos
+
+## Banco de dados
+
+O projeto usa SQLite e cria o banco automaticamente na primeira execução.
+
+Arquivo do banco:
+
+- `AcervoDigital/acervo.db`
+
+## Usuário de exemplo
+
+O sistema foi montado para funcionar sem configuração adicional de servidor externo.

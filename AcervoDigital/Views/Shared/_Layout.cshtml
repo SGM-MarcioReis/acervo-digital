@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Acervo Digital</title>
+    <link rel="stylesheet" href="~/css/site.css" />
+</head>
+<body>
+    <header class="topbar">
+        <div class="container nav">
+            <a asp-controller="Home" asp-action="Index" class="brand">
+                <span class="brand-mark">A</span>
+                <div>
+                    <strong>Acervo Digital</strong>
+                    <small>Gestão de imagens</small>
+                </div>
+            </a>
+            <nav>
+                <a asp-controller="Home" asp-action="Index">Início</a>
+                <a asp-controller="Home" asp-action="Create">Nova imagem</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container main-content">
+        @RenderBody()
+    </main>
+
+    <footer class="footer">
+        <div class="container footer-inner">
+            <span>© @DateTime.Now.Year Acervo Digital</span>
+        </div>
+    </footer>
+
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

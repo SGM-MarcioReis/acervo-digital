@@ -1,0 +1,26 @@
+@model AcervoDigital.Models.Imagem
+
+@{
+    ViewData["Title"] = "Excluir imagem";
+}
+
+<div class="form-container delete-box">
+    <h1>Excluir imagem</h1>
+    <p>Tem certeza que deseja remover esta imagem do acervo?</p>
+
+    <div class="delete-preview">
+        <img src="@Model.CaminhoArquivo" alt="@Model.Titulo" />
+        <div>
+            <h3>@Model.Titulo</h3>
+            <p>@Model.Categoria</p>
+        </div>
+    </div>
+
+    <form asp-action="Delete" method="post">
+        <input type="hidden" name="id" value="@Model.Id" />
+        <div class="form-actions">
+            <button type="submit" class="btn btn-danger">Confirmar exclusão</button>
+            <a asp-action="Index" class="btn btn-secondary">Cancelar</a>
+        </div>
+    </form>
+</div>
