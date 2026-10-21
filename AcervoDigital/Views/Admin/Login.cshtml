@@ -1,0 +1,48 @@
+@model AcervoDigital.Models.AdminLoginViewModel
+
+@{
+    ViewData["Title"] = "Login do administrador";
+    var returnUrl = ViewData["ReturnUrl"]?.ToString();
+}
+
+<div class="auth-shell">
+    <div class="auth-card">
+        <div class="auth-header">
+            <span class="brand-mark">A</span>
+            <h1>Acervo Digital</h1>
+        </div>
+
+        <p class="auth-subtitle">Acesso administrativo</p>
+
+        <form asp-action="Login" method="post">
+            <input type="hidden" name="returnUrl" value="@returnUrl" />
+            <div asp-validation-summary="ModelOnly" class="validation-summary"></div>
+
+            <div class="form-group">
+                <label asp-for="Username">Usuário</label>
+                <input asp-for="Username" class="form-control" autocomplete="username" />
+                <span asp-validation-for="Username" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Password">Senha</label>
+                <input asp-for="Password" type="password" class="form-control" autocomplete="current-password" />
+                <span asp-validation-for="Password" class="text-danger"></span>
+            </div>
+
+            <div class="checkbox-row">
+                <input asp-for="Lembrar" type="checkbox" />
+                <label asp-for="Lembrar">Manter conectado</label>
+            </div>
+
+            <div class="form-actions">
+                <button type="submit" class="btn btn-primary">Entrar</button>
+                <a asp-controller="Home" asp-action="Index" class="btn btn-secondary">Voltar ao site</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
