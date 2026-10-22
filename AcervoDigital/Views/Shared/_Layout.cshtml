@@ -8,17 +8,19 @@
 </head>
 <body>
     <header class="topbar">
-        <div class="container nav">
+        <div class="container navbar">
             <a asp-controller="Home" asp-action="Index" class="brand">
                 <span class="brand-mark">A</span>
                 <div>
                     <strong>Acervo Digital</strong>
-                    <small>Gestão de imagens</small>
+                    <small>Acervo da banda</small>
                 </div>
             </a>
-            <nav>
+
+            <nav class="nav" aria-label="Navegação principal">
                 <a asp-controller="Home" asp-action="Index">Início</a>
-                <a asp-controller="Admin" asp-action="Dashboard">Painel</a>
+                <a asp-controller="Home" asp-action="Index" asp-fragment="acervo">Acervo</a>
+                <a asp-controller="Home" asp-action="Index" asp-fragment="relatorio">Relatório</a>
                 <a asp-controller="Admin" asp-action="Login">Admin</a>
             </nav>
         </div>
@@ -30,7 +32,14 @@
 
     <footer class="footer">
         <div class="container footer-inner">
-            <span>© @DateTime.Now.Year Acervo Digital</span>
+            <div>
+                <strong>Acervo Digital</strong>
+                <p>Registro visual e textual da banda.</p>
+            </div>
+            <a asp-controller="Admin" asp-action="Login" class="button secondary">Entrar</a>
+        </div>
+        <div class="footer-bottom">
+            <span>© <span id="year"></span> Acervo Digital</span>
         </div>
     </footer>
 

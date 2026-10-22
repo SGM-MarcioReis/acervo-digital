@@ -14,7 +14,18 @@ public class ImagemEditViewModel
     public string? Descricao { get; set; }
 
     [Required(ErrorMessage = "Selecione a categoria.")]
-    public string Categoria { get; set; } = "Geral";
+    public string Categoria { get; set; } = "Show";
+
+    [Required(ErrorMessage = "Informe a data do evento.")]
+    [DataType(DataType.Date)]
+    public DateTime DataEvento { get; set; } = DateTime.Today;
+
+    [Required(ErrorMessage = "Informe o ano.")]
+    public int Ano { get; set; } = DateTime.Now.Year;
+
+    [Required(ErrorMessage = "Informe o local.")]
+    [StringLength(200)]
+    public string Local { get; set; } = string.Empty;
 
     public string? ImagemAtual { get; set; }
 

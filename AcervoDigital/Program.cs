@@ -1,7 +1,7 @@
 using AcervoDigital.Data;
 using AcervoDigital.Models;
-using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -46,6 +46,8 @@ app.MapControllerRoute(
 using (var scope = app.Services.CreateScope())
 {
     var db = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+
+    db.Database.EnsureDeleted();
     db.Database.EnsureCreated();
 
     if (!db.AdminAccounts.Any())

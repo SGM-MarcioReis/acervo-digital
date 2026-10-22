@@ -4,57 +4,83 @@
     ViewData["Title"] = "Editar imagem";
 }
 
-<div class="form-container">
-    <div class="section-title-row">
-        <h1>Editar imagem</h1>
-        <a asp-action="Dashboard" class="btn btn-secondary">Voltar</a>
+<div class="admin-page">
+    <div class="admin-panel compact-panel">
+        <div class="panel-header">
+            <div>
+                <span class="eyebrow">Editar imagem</span>
+                <h2>Atualizar foto do acervo</h2>
+            </div>
+            <a asp-action="Dashboard" class="btn btn-secondary">Voltar</a>
+        </div>
+
+        <form asp-action="Edit" method="post" enctype="multipart/form-data" class="form-box">
+            <input type="hidden" asp-for="Id" />
+            <div asp-validation-summary="ModelOnly" class="validation-summary"></div>
+
+            <div class="form-grid">
+                <div class="field">
+                    <label asp-for="Titulo">Título</label>
+                    <input asp-for="Titulo" class="input" />
+                    <span asp-validation-for="Titulo" class="text-danger"></span>
+                </div>
+
+                <div class="field">
+                    <label asp-for="Categoria">Categoria</label>
+                    <select asp-for="Categoria" class="input">
+                        <option value="Show">Show</option>
+                        <option value="Ensaio">Ensaio</option>
+                        <option value="Evento">Evento</option>
+                        <option value="Divulgação">Divulgação</option>
+                        <option value="Backstage">Backstage</option>
+                    </select>
+                    <span asp-validation-for="Categoria" class="text-danger"></span>
+                </div>
+
+                <div class="field">
+                    <label asp-for="DataEvento">Data do evento</label>
+                    <input asp-for="DataEvento" type="date" class="input" />
+                    <span asp-validation-for="DataEvento" class="text-danger"></span>
+                </div>
+
+                <div class="field">
+                    <label asp-for="Ano">Ano</label>
+                    <input asp-for="Ano" class="input" />
+                    <span asp-validation-for="Ano" class="text-danger"></span>
+                </div>
+
+                <div class="field full-width">
+                    <label asp-for="Local">Local</label>
+                    <input asp-for="Local" class="input" />
+                    <span asp-validation-for="Local" class="text-danger"></span>
+                </div>
+
+                <div class="field full-width">
+                    <label asp-for="Descricao">Descrição</label>
+                    <textarea asp-for="Descricao" class="input textarea" rows="5"></textarea>
+                    <span asp-validation-for="Descricao" class="text-danger"></span>
+                </div>
+
+                <div class="field full-width">
+                    <label asp-for="Foto">Nova imagem (opcional)</label>
+                    <input asp-for="Foto" type="file" class="input" accept="image/*" />
+                    <span asp-validation-for="Foto" class="text-danger"></span>
+                </div>
+
+                @if (!string.IsNullOrWhiteSpace(Model.ImagemAtual))
+                {
+                    <div class="field full-width">
+                        <img src="@Model.ImagemAtual" alt="Imagem atual" class="current-image" />
+                    </div>
+                }
+            </div>
+
+            <div class="form-actions">
+                <button type="submit" class="btn btn-primary">Salvar alterações</button>
+                <a asp-action="Dashboard" class="btn btn-secondary">Cancelar</a>
+            </div>
+        </form>
     </div>
-
-    <form asp-action="Edit" method="post" enctype="multipart/form-data">
-        <input type="hidden" asp-for="Id" />
-        <div asp-validation-summary="ModelOnly" class="validation-summary"></div>
-
-        <div class="form-group">
-            <label asp-for="Titulo">Título</label>
-            <input asp-for="Titulo" class="form-control" />
-            <span asp-validation-for="Titulo" class="text-danger"></span>
-        </div>
-
-        <div class="form-group">
-            <label asp-for="Categoria">Categoria</label>
-            <select asp-for="Categoria" class="form-control">
-                <option value="Programa">Programa</option>
-                <option value="Ação">Ação</option>
-                <option value="Impacto">Impacto</option>
-                <option value="Geral">Geral</option>
-            </select>
-            <span asp-validation-for="Categoria" class="text-danger"></span>
-        </div>
-
-        <div class="form-group">
-            <label asp-for="Descricao">Descrição</label>
-            <textarea asp-for="Descricao" rows="4" class="form-control"></textarea>
-            <span asp-validation-for="Descricao" class="text-danger"></span>
-        </div>
-
-        <div class="form-group">
-            <label>Imagem atual</label>
-            @if (!string.IsNullOrWhiteSpace(Model.ImagemAtual))
-            {
-                <img src="@Model.ImagemAtual" alt="Imagem atual" class="edit-preview" />
-            }
-        </div>
-
-        <div class="form-group">
-            <label asp-for="Foto">Trocar imagem</label>
-            <input asp-for="Foto" type="file" accept="image/*" class="form-control" />
-        </div>
-
-        <div class="form-actions">
-            <button type="submit" class="btn btn-primary">Salvar alterações</button>
-            <a asp-action="Dashboard" class="btn btn-secondary">Cancelar</a>
-        </div>
-    </form>
 </div>
 
 @section Scripts {

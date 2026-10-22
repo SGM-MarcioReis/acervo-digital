@@ -4,64 +4,73 @@
     ViewData["Title"] = "Painel administrativo";
 }
 
-<div class="dashboard-header">
-    <div>
-        <span class="eyebrow">Painel administrativo</span>
-        <h1>Gerenciamento do acervo</h1>
-    </div>
-    <div class="header-actions">
-        <a asp-action="Create" class="btn btn-primary">Nova imagem</a>
-        <a asp-action="ChangePassword" class="btn btn-secondary">Alterar senha</a>
-        <a asp-action="Logout" class="btn btn-secondary">Sair</a>
-    </div>
-</div>
+<div class="admin-page">
+    <div class="admin-panel">
+        <div class="panel-header">
+            <div>
+                <span class="eyebrow">Painel administrativo</span>
+                <h2>Gerenciamento do acervo</h2>
+            </div>
 
-@if (TempData["SuccessMessage"] != null)
-{
-    <div class="alert-success">@TempData["SuccessMessage"]</div>
-}
+            <div class="header-actions">
+                <a asp-action="Create" class="btn btn-primary">Nova imagem</a>
+                <a asp-action="ChangePassword" class="btn btn-secondary">Alterar senha</a>
+                <a asp-action="Logout" class="btn btn-secondary">Sair</a>
+            </div>
+        </div>
 
-@if (!Model.Any())
-{
-    <div class="empty-state admin-empty">
-        <h2>Nenhuma imagem cadastrada</h2>
-        <p>Cadastre sua primeira imagem para começar a organização do acervo.</p>
-    </div>
-}
-else
-{
-    <div class="admin-grid">
-        @foreach (var imagem in Model)
+        @if (TempData["SuccessMessage"] != null)
         {
-            <article class="admin-card">
-                <a href="@imagem.CaminhoArquivo"
-                   class="image-open"
-                   data-image="@imagem.CaminhoArquivo"
-                   data-title="@imagem.Titulo"
-                   data-description="@(!string.IsNullOrWhiteSpace(imagem.Descricao) ? imagem.Descricao : "Sem descrição disponível.")">
-                    <img src="@imagem.CaminhoArquivo" alt="@imagem.Titulo" />
-                </a>
-                <div class="admin-body">
-                    <span class="tag">@imagem.Categoria</span>
-                    <h3>@imagem.Titulo</h3>
-                    @if (!string.IsNullOrWhiteSpace(imagem.Descricao))
-                    {
-                        <p>@imagem.Descricao</p>
-                    }
-                    <small>@imagem.DataCadastro.ToString("dd/MM/yyyy")</small>
-                    <div class="admin-actions">
-                        <a asp-action="Edit" asp-route-id="@imagem.Id" class="btn btn-secondary">Editar</a>
-                        <form asp-action="Delete" method="post">
-                            @Html.AntiForgeryToken()
-                            <input type="hidden" name="id" value="@imagem.Id" />
-                            <button type="submit" class="btn btn-danger">Excluir</button>
-                        </form>
-                    </div>
-                </div>
-            </article>
+            <div class="alert-success">@TempData["SuccessMessage"]</div>
+        }
+
+        @if (!Model.Any())
+        {
+            <div class="empty-state">
+                <h2>Nenhuma imagem cadastrada</h2>
+                <p>Cadastre sua primeira foto da banda para começar.</p>
+            </div>
+        }
+        else
+        {
+            <div class="admin-grid">
+                @foreach (var imagem in Model)
+                {
+                    <article class="admin-card">
+                        <a href="@imagem.CaminhoArquivo"
+                           class="image-open"
+                           data-image="@imagem.CaminhoArquivo"
+                           data-title="@imagem.Titulo"
+                           data-description="@(!string.IsNullOrWhiteSpace(imagem.Descricao) ? imagem.Descricao : "Sem descrição disponível.")">
+                            <img src="@imagem.CaminhoArquivo" alt="@imagem.Titulo" />
+                        </a>
+
+                        <div class="admin-body">
+                            <span class="tag">@imagem.Categoria</span>
+                            <h3>@imagem.Titulo</h3>
+
+                            @if (!string.IsNullOrWhiteSpace(imagem.Descricao))
+                            {
+                                <p>@imagem.Descricao</p>
+                            }
+
+                            <small>@imagem.DataEvento.ToString("dd/MM/yyyy")</small>
+
+                            <div class="admin-actions">
+                                <a asp-action="Edit" asp-route-id="@imagem.Id" class="btn btn-secondary">Editar</a>
+                                <form asp-action="Delete" method="post">
+                                    @Html.AntiForgeryToken()
+                                    <input type="hidden" name="id" value="@imagem.Id" />
+                                    <button type="submit" class="btn btn-danger">Excluir</button>
+                                </form>
+                            </div>
+                        </div>
+                    </article>
+                }
+            </div>
         }
     </div>
-}
+</div>
 
 <div class="image-modal" id="imageModal" aria-hidden="true">
     <div class="image-modal-content">

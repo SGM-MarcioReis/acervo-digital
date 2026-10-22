@@ -1,5 +1,4 @@
 using AcervoDigital.Data;
-using AcervoDigital.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -17,7 +16,7 @@ public class HomeController : Controller
     public async Task<IActionResult> Index()
     {
         var imagens = await _context.Imagens
-            .OrderByDescending(i => i.Id)
+            .OrderByDescending(i => i.DataEvento)
             .ToListAsync();
 
         return View(imagens);

@@ -78,58 +78,10 @@ public class AdminController : Controller
     public async Task<IActionResult> Dashboard()
     {
         var imagens = await _context.Imagens
-            .OrderByDescending(i => i.Id)
+            .OrderByDescending(i => i.DataEvento)
             .ToListAsync();
 
         return View(imagens);
-    }
-
-    public IActionResult ChangePassword()
-    {
-        return View(new AdminChangePasswordViewModel());
-    }
-
-    [HttpPost]
-    [ValidateAntiForgeryToken]
-    public async Task<IActionResult> ChangePassword(AdminChangePasswordViewModel model)
-    {
-        if (!ModelState.IsValid)
-        {
-            return View(model);
-        }
-
-        var username = User.Identity?.Name;
-        var admin = await _context.AdminAccounts
-            .FirstOrDefaultAsync(x => x.Username == username);
-
-        if (admin == null)
-        {
-            return Challenge();
-        }
-
-        if (admin.Password != model.CurrentPassword)
-        {
-            ModelState.AddModelError(nameof(model.CurrentPassword), "Senha atual incorreta.");
-            return View(model);
-        }
-
-        if (string.IsNullOrWhiteSpace(model.NewPassword) || model.NewPassword.Length < 4)
-        {
-            ModelState.AddModelError(nameof(model.NewPassword), "A nova senha deve ter pelo menos 4 caracteres.");
-            return View(model);
-        }
-
-        if (model.NewPassword != model.ConfirmPassword)
-        {
-            ModelState.AddModelError(nameof(model.ConfirmPassword), "A confirmação da nova senha não confere.");
-            return View(model);
-        }
-
-        admin.Password = model.NewPassword;
-        await _context.SaveChangesAsync();
-
-        TempData["SuccessMessage"] = "Senha alterada com sucesso.";
-        return RedirectToAction(nameof(Dashboard));
     }
 
     public IActionResult Create()
@@ -168,6 +120,9 @@ public class AdminController : Controller
             Titulo = model.Titulo,
             Descricao = model.Descricao,
             Categoria = model.Categoria,
+            DataEvento = model.DataEvento,
+            Ano = model.Ano,
+            Local = model.Local,
             NomeArquivo = nomeArquivo,
             CaminhoArquivo = $"/uploads/{nomeArquivo}",
             DataCadastro = DateTime.Now
@@ -193,6 +148,9 @@ public class AdminController : Controller
             Titulo = imagem.Titulo,
             Descricao = imagem.Descricao,
             Categoria = imagem.Categoria,
+            DataEvento = imagem.DataEvento,
+            Ano = imagem.Ano,
+            Local = imagem.Local,
             ImagemAtual = imagem.CaminhoArquivo
         };
 
@@ -222,6 +180,9 @@ public class AdminController : Controller
         imagem.Titulo = model.Titulo;
         imagem.Descricao = model.Descricao;
         imagem.Categoria = model.Categoria;
+        imagem.DataEvento = model.DataEvento;
+        imagem.Ano = model.Ano;
+        imagem.Local = model.Local;
 
         if (model.Foto != null && model.Foto.Length > 0)
         {
@@ -274,6 +235,47 @@ public class AdminController : Controller
         _context.Imagens.Remove(imagem);
         await _context.SaveChangesAsync();
 
+        return RedirectToAction(nameof(Dashboard));
+    }
+
+    public IActionResult ChangePassword()
+    {
+        return View(new AdminChangePasswordViewModel());
+    }
+
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> ChangePassword(AdminChangePasswordViewModel model)
+    {
+        if (!ModelState.IsValid)
+        {
+            return View(model);
+        }
+
+        var username = User.Identity?.Name;
+        var admin = await _context.AdminAccounts.FirstOrDefaultAsync(x => x.Username == username);
+
+        if (admin == null)
+        {
+            return Challenge();
+        }
+
+        if (admin.Password != model.CurrentPassword)
+        {
+            ModelState.AddModelError(nameof(model.CurrentPassword), "Senha atual incorreta.");
+            return View(model);
+        }
+
+        if (model.NewPassword != model.ConfirmPassword)
+        {
+            ModelState.AddModelError(nameof(model.ConfirmPassword), "A confirmação da nova senha não confere.");
+            return View(model);
+        }
+
+        admin.Password = model.NewPassword;
+        await _context.SaveChangesAsync();
+
+        TempData["SuccessMessage"] = "Senha alterada com sucesso.";
         return RedirectToAction(nameof(Dashboard));
     }
 

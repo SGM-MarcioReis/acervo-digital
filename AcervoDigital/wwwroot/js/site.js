@@ -1,69 +1,70 @@
-@model IEnumerable<AcervoDigital.Models.Imagem>
+document.addEventListener('DOMContentLoaded', () => {
+    const year = document.getElementById('year');
+    if (year) {
+        year.textContent = new Date().getFullYear();
+    }
 
-@{
-    ViewData["Title"] = "Painel administrativo";
-}
+    const modal = document.getElementById('imageModal');
+    if (!modal) return;
 
-<div class="dashboard-header">
-    <div>
-        <span class="eyebrow">Painel administrativo</span>
-        <h1>Gerenciamento do acervo</h1>
-    </div>
-    <div class="header-actions">
-        <a asp-action="Create" class="btn btn-primary">Nova imagem</a>
-        <a asp-action="Logout" class="btn btn-secondary">Sair</a>
-    </div>
-</div>
+    const modalImage = modal.querySelector('.image-modal-image');
+    const modalTitle = modal.querySelector('.image-modal-title');
+    const modalDescription = modal.querySelector('.image-modal-description');
+    const closeButton = modal.querySelector('.image-modal-close');
 
-@if (!Model.Any())
-{
-    <div class="empty-state admin-empty">
-        <h2>Nenhuma imagem cadastrada</h2>
-        <p>Cadastre sua primeira imagem para começar a organização do acervo.</p>
-    </div>
-}
-else
-{
-    <div class="admin-grid">
-        @foreach (var imagem in Model)
-        {
-            <article class="admin-card">
-                <a href="@imagem.CaminhoArquivo"
-                   class="image-open"
-                   data-image="@imagem.CaminhoArquivo"
-                   data-title="@imagem.Titulo"
-                   data-description="@(!string.IsNullOrWhiteSpace(imagem.Descricao) ? imagem.Descricao : "Sem descrição disponível.")">
-                    <img src="@imagem.CaminhoArquivo" alt="@imagem.Titulo" />
-                </a>
-                <div class="admin-body">
-                    <span class="tag">@imagem.Categoria</span>
-                    <h3>@imagem.Titulo</h3>
-                    @if (!string.IsNullOrWhiteSpace(imagem.Descricao))
-                    {
-                        <p>@imagem.Descricao</p>
-                    }
-                    <small>@imagem.DataCadastro.ToString("dd/MM/yyyy")</small>
-                    <div class="admin-actions">
-                        <a asp-action="Edit" asp-route-id="@imagem.Id" class="btn btn-secondary">Editar</a>
-                        <form asp-action="Delete" method="post">
-                            @Html.AntiForgeryToken()
-                            <input type="hidden" name="id" value="@imagem.Id" />
-                            <button type="submit" class="btn btn-danger">Excluir</button>
-                        </form>
-                    </div>
-                </div>
-            </article>
+    const closeModal = () => {
+        modal.classList.remove('is-open');
+        modal.setAttribute('aria-hidden', 'true');
+        modalImage.src = '';
+        modalTitle.textContent = '';
+        modalDescription.textContent = '';
+    };
+
+    document.querySelectorAll('.image-open').forEach((link) => {
+        link.addEventListener('click', (event) => {
+            event.preventDefault();
+
+            const image = link.dataset.image || link.getAttribute('href');
+            const title = link.dataset.title || 'Imagem';
+            const description = link.dataset.description || 'Sem descrição disponível.';
+
+            modalImage.src = image;
+            modalTitle.textContent = title;
+            modalDescription.textContent = description;
+
+            modal.classList.add('is-open');
+            modal.setAttribute('aria-hidden', 'false');
+        });
+    });
+
+    closeButton?.addEventListener('click', closeModal);
+
+    modal.addEventListener('click', (event) => {
+        if (event.target === modal) {
+            closeModal();
         }
-    </div>
-}
+    });
 
-<div class="image-modal" id="imageModal" aria-hidden="true">
-    <div class="image-modal-content">
-        <button type="button" class="image-modal-close" aria-label="Fechar">×</button>
-        <img class="image-modal-image" src="" alt="Imagem ampliada" />
-        <div class="image-modal-body">
-            <h3 class="image-modal-title"></h3>
-            <p class="image-modal-description"></p>
-        </div>
-    </div>
-</div>
+    document.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape' && modal.classList.contains('is-open')) {
+            closeModal();
+        }
+    });
+
+    const buttons = document.querySelectorAll('.filter');
+    buttons.forEach(button => {
+        button.addEventListener('click', () => {
+            const filter = button.dataset.filter;
+            const cards = document.querySelectorAll('.card');
+
+            buttons.forEach(btn => btn.classList.remove('active'));
+            button.classList.add('active');
+
+            cards.forEach(card => {
+                const category = card.dataset.category;
+                const shouldShow = filter === 'all' || category === filter;
+                card.style.display = shouldShow ? 'block' : 'none';
+            });
+        });
+    });
+});

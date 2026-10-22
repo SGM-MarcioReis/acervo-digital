@@ -16,7 +16,17 @@ public class Imagem
 
     [Required]
     [StringLength(100)]
-    public string Categoria { get; set; } = "Geral";
+    public string Categoria { get; set; } = "Show";
+
+    [Required]
+    public DateTime DataEvento { get; set; } = DateTime.Today;
+
+    [Required]
+    public int Ano { get; set; } = DateTime.Now.Year;
+
+    [Required]
+    [StringLength(200)]
+    public string Local { get; set; } = string.Empty;
 
     [Required]
     [StringLength(255)]
