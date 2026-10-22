@@ -36,7 +36,7 @@ public class Imagem
     [StringLength(500)]
     public string CaminhoArquivo { get; set; } = string.Empty;
 
-    public bool ExibirNaHome { get; set; }
+    public int PosicaoHome { get; set; }
 
     public DateTime DataCadastro { get; set; } = DateTime.Now;
 }

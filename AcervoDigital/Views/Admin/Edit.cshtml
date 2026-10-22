@@ -61,11 +61,22 @@
                     <span asp-validation-for="Descricao" class="text-danger"></span>
                 </div>
 
-                <div class="field full-width checkbox-field">
-                    <label>
-                        <input asp-for="ExibirNaHome" type="checkbox" />
-                        Usar esta imagem na capa principal da home
-                    </label>
+                <div class="field full-width">
+                    <label>Imagem em destaque na home</label>
+                    <div class="highlight-selector">
+                        <label class="highlight-option">
+                            <input asp-for="PosicaoHome" type="radio" value="0" />
+                            <span>Não exibir</span>
+                        </label>
+                        <label class="highlight-option">
+                            <input asp-for="PosicaoHome" type="radio" value="1" />
+                            <span>Capa principal</span>
+                        </label>
+                        <label class="highlight-option">
+                            <input asp-for="PosicaoHome" type="radio" value="2" />
+                            <span>Capa secundária</span>
+                        </label>
+                    </div>
                 </div>
 
                 <div class="field full-width">

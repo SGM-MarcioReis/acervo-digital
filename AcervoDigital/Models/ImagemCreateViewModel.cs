@@ -25,7 +25,8 @@ public class ImagemCreateViewModel
     [StringLength(200)]
     public string Local { get; set; } = string.Empty;
 
-    public bool ExibirNaHome { get; set; }
+    [Range(0, 2, ErrorMessage = "Selecione uma posição válida para a home.")]
+    public int PosicaoHome { get; set; }
 
     [Required(ErrorMessage = "Selecione uma imagem para enviar.")]
     public IFormFile? Foto { get; set; }

@@ -47,6 +47,20 @@
 
                         <div class="admin-body">
                             <span class="tag">@imagem.Categoria</span>
+
+                            @if (imagem.PosicaoHome == 1)
+                            {
+                                <span class="home-badge principal">Capa principal</span>
+                            }
+                            else if (imagem.PosicaoHome == 2)
+                            {
+                                <span class="home-badge secundaria">Capa secundária</span>
+                            }
+                            else
+                            {
+                                <span class="home-badge sem-destaque">Sem destaque</span>
+                            }
+
                             <h3>@imagem.Titulo</h3>
 
                             @if (!string.IsNullOrWhiteSpace(imagem.Descricao))

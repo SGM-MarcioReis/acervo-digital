@@ -6,13 +6,16 @@
 
 @{
     var destaques = Model
-        .Where(x => x.ExibirNaHome)
-        .OrderByDescending(x => x.DataCadastro)
+        .Where(x => x.PosicaoHome > 0)
+        .OrderBy(x => x.PosicaoHome)
         .Take(2)
         .ToList();
 
-    var destaquePrincipal = destaques.FirstOrDefault();
-    var destaqueSecundario = destaques.Skip(1).FirstOrDefault();
+    var destaquePrincipal = destaques.FirstOrDefault(x => x.PosicaoHome == 1)
+        ?? destaques.FirstOrDefault();
+
+    var destaqueSecundario = destaques.FirstOrDefault(x => x.PosicaoHome == 2)
+        ?? destaques.Skip(1).FirstOrDefault();
 }
 
 <section class="hero">

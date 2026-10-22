@@ -23,6 +23,28 @@ public class AdminController : Controller
         _configuration = configuration;
     }
 
+    private async Task AtualizarPosicoesHome(int? imagemIdIgnorada, int posicaoSelecionada)
+    {
+        if (posicaoSelecionada <= 0)
+        {
+            return;
+        }
+
+        var imagens = await _context.Imagens
+            .Where(i => i.PosicaoHome == posicaoSelecionada && (!imagemIdIgnorada.HasValue || i.Id != imagemIdIgnorada.Value))
+            .ToListAsync();
+
+        foreach (var imagem in imagens)
+        {
+            imagem.PosicaoHome = 0;
+        }
+
+        if (imagens.Count > 0)
+        {
+            await _context.SaveChangesAsync();
+        }
+    }
+
     [AllowAnonymous]
     public IActionResult Login(string? returnUrl = null)
     {
@@ -104,6 +126,11 @@ public class AdminController : Controller
             return View(model);
         }
 
+        if (model.PosicaoHome > 0)
+        {
+            await AtualizarPosicoesHome(null, model.PosicaoHome);
+        }
+
         var nomeArquivo = $"{Guid.NewGuid()}{Path.GetExtension(model.Foto.FileName)}";
         var pastaUploads = Path.Combine(_environment.WebRootPath ?? Path.Combine(Directory.GetCurrentDirectory(), "wwwroot"), "uploads");
         Directory.CreateDirectory(pastaUploads);
@@ -123,7 +150,7 @@ public class AdminController : Controller
             DataEvento = model.DataEvento,
             Ano = model.Ano,
             Local = model.Local,
-            ExibirNaHome = model.ExibirNaHome,
+            PosicaoHome = model.PosicaoHome,
             NomeArquivo = nomeArquivo,
             CaminhoArquivo = $"/uploads/{nomeArquivo}",
             DataCadastro = DateTime.Now
@@ -152,7 +179,7 @@ public class AdminController : Controller
             DataEvento = imagem.DataEvento,
             Ano = imagem.Ano,
             Local = imagem.Local,
-            ExibirNaHome = imagem.ExibirNaHome,
+            PosicaoHome = imagem.PosicaoHome,
             ImagemAtual = imagem.CaminhoArquivo
         };
 
@@ -185,7 +212,13 @@ public class AdminController : Controller
         imagem.DataEvento = model.DataEvento;
         imagem.Ano = model.Ano;
         imagem.Local = model.Local;
-        imagem.ExibirNaHome = model.ExibirNaHome;
+
+        if (model.PosicaoHome > 0)
+        {
+            await AtualizarPosicoesHome(id, model.PosicaoHome);
+        }
+
+        imagem.PosicaoHome = model.PosicaoHome;
 
         if (model.Foto != null && model.Foto.Length > 0)
         {

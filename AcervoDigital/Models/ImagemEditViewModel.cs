@@ -27,7 +27,8 @@ public class ImagemEditViewModel
     [StringLength(200)]
     public string Local { get; set; } = string.Empty;
 
-    public bool ExibirNaHome { get; set; }
+    [Range(0, 2, ErrorMessage = "Selecione uma posição válida para a home.")]
+    public int PosicaoHome { get; set; }
 
     public string? ImagemAtual { get; set; }
 
