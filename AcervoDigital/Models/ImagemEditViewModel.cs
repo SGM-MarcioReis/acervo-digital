@@ -27,6 +27,8 @@ public class ImagemEditViewModel
     [StringLength(200)]
     public string Local { get; set; } = string.Empty;
 
+    public bool ExibirNaHome { get; set; }
+
     public string? ImagemAtual { get; set; }
 
     public IFormFile? Foto { get; set; }

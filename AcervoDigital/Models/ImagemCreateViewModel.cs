@@ -25,6 +25,8 @@ public class ImagemCreateViewModel
     [StringLength(200)]
     public string Local { get; set; } = string.Empty;
 
+    public bool ExibirNaHome { get; set; }
+
     [Required(ErrorMessage = "Selecione uma imagem para enviar.")]
     public IFormFile? Foto { get; set; }
 }

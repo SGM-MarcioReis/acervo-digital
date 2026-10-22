@@ -4,6 +4,17 @@
     ViewData["Title"] = "Acervo da banda";
 }
 
+@{
+    var destaques = Model
+        .Where(x => x.ExibirNaHome)
+        .OrderByDescending(x => x.DataCadastro)
+        .Take(2)
+        .ToList();
+
+    var destaquePrincipal = destaques.FirstOrDefault();
+    var destaqueSecundario = destaques.Skip(1).FirstOrDefault();
+}
+
 <section class="hero">
     <div class="container hero-grid">
         <div class="hero-copy">
@@ -37,10 +48,12 @@
 
         <div class="hero-visual" aria-label="Imagem ilustrativa da banda">
             <div class="visual-card main">
-                <img src="https://images.unsplash.com/photo-1501386761578-eac5c8dd5006?auto=format&fit=crop&w=900&q=80" alt="Banda em apresentação" />
+                <img src="@(destaquePrincipal != null ? destaquePrincipal.CaminhoArquivo : "https://images.unsplash.com/photo-1501386761578-eac5c8dd5006?auto=format&fit=crop&w=900&q=80")"
+                     alt="@(destaquePrincipal != null ? destaquePrincipal.Titulo : "Banda em apresentação")" />
             </div>
             <div class="visual-card floating">
-                <img src="https://images.unsplash.com/photo-1501612780327-45045538702b?auto=format&fit=crop&w=700&q=80" alt="Banda em ensaio" />
+                <img src="@(destaqueSecundario != null ? destaqueSecundario.CaminhoArquivo : "https://images.unsplash.com/photo-1501612780327-45045538702b?auto=format&fit=crop&w=700&q=80")"
+                     alt="@(destaqueSecundario != null ? destaqueSecundario.Titulo : "Banda em ensaio")" />
             </div>
         </div>
     </div>

@@ -123,6 +123,7 @@ public class AdminController : Controller
             DataEvento = model.DataEvento,
             Ano = model.Ano,
             Local = model.Local,
+            ExibirNaHome = model.ExibirNaHome,
             NomeArquivo = nomeArquivo,
             CaminhoArquivo = $"/uploads/{nomeArquivo}",
             DataCadastro = DateTime.Now
@@ -151,6 +152,7 @@ public class AdminController : Controller
             DataEvento = imagem.DataEvento,
             Ano = imagem.Ano,
             Local = imagem.Local,
+            ExibirNaHome = imagem.ExibirNaHome,
             ImagemAtual = imagem.CaminhoArquivo
         };
 
@@ -183,6 +185,7 @@ public class AdminController : Controller
         imagem.DataEvento = model.DataEvento;
         imagem.Ano = model.Ano;
         imagem.Local = model.Local;
+        imagem.ExibirNaHome = model.ExibirNaHome;
 
         if (model.Foto != null && model.Foto.Length > 0)
         {

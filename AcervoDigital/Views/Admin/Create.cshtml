@@ -60,6 +60,13 @@
                     <span asp-validation-for="Descricao" class="text-danger"></span>
                 </div>
 
+                <div class="field full-width checkbox-field">
+                    <label>
+                        <input asp-for="ExibirNaHome" type="checkbox" />
+                        Usar esta imagem na capa principal da home
+                    </label>
+                </div>
+
                 <div class="field full-width">
                     <label asp-for="Foto">Imagem</label>
                     <input asp-for="Foto" type="file" class="input" accept="image/*" />
