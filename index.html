@@ -31,6 +31,7 @@
           <a href="#inicio">Início</a>
           <a href="#acervo">Acervo</a>
           <a href="#relatorio">Relatório</a>
+          <a href="#admin">Admin</a>
           <a href="#contato">Contato</a>
         </nav>
       </div>
@@ -238,6 +239,90 @@
           </aside>
         </div>
       </section>
+
+      <section id="admin" class="admin-section">
+        <div class="container">
+          <div class="section-head admin-head">
+            <div>
+              <span class="eyebrow">Admin</span>
+              <h2>Painel de apresentação e exportação</h2>
+            </div>
+            <p>
+              Gere uma apresentação em PDF a partir do conteúdo do acervo para compartilhar com a
+              equipe, parceiros ou responsável pela prestação de contas.
+            </p>
+          </div>
+
+          <div class="admin-layout">
+            <div class="admin-card">
+              <h3>Configurar apresentação</h3>
+
+              <div class="admin-form">
+                <label>
+                  Nome da apresentação
+                  <input id="presentation-title" type="text" value="Prestação de Contas" />
+                </label>
+
+                <label>
+                  Período
+                  <input id="presentation-period" type="text" value="2025 / 2026" />
+                </label>
+              </div>
+
+              <div class="admin-actions">
+                <button id="btn-generate-pdf" class="button primary" type="button">
+                  Gerar PDF do PowerPoint
+                </button>
+                <button id="btn-clear" class="button secondary" type="button">
+                  Limpar
+                </button>
+              </div>
+            </div>
+
+            <div id="presentation-export" class="presentation-preview" aria-label="Pré-visualização da apresentação">
+              <div class="slide slide-main">
+                <div class="slide-badge">Prestação de Contas</div>
+                <h3 class="slide-title">Prestação de Contas</h3>
+                <p class="slide-period">2025 / 2026</p>
+                <div class="slide-stats">
+                  <span>24 registros</span>
+                  <span>06 programas</span>
+                  <span>100% documentado</span>
+                </div>
+              </div>
+
+              <div class="slide slide-secondary">
+                <div class="slide-badge">Resumo</div>
+                <h4>Objetivos e alcance</h4>
+                <ul>
+                  <li>Fortalecer ações sociais e institucionais</li>
+                  <li>Acompanhar resultados e indicadores</li>
+                  <li>Documentar impacto com transparência</li>
+                </ul>
+              </div>
+
+              <div class="slide slide-tertiary">
+                <div class="slide-badge">Impacto</div>
+                <h4>Resultados principais</h4>
+                <div class="mini-cards">
+                  <div>
+                    <strong>+40%</strong>
+                    <span>Participação</span>
+                  </div>
+                  <div>
+                    <strong>06</strong>
+                    <span>Programas</span>
+                  </div>
+                  <div>
+                    <strong>100%</strong>
+                    <span>Registro</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
     </main>
 
     <footer id="contato" class="footer">
@@ -253,361 +338,8 @@
       </div>
     </footer>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script src="script.js"></script>
   </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
